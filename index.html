@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>侧边栏</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            position: fixed;
+            right: 0;
+            top: 200px;
+            list-style: none;
+        }
+        #box li{
+            position: relative;
+            margin-bottom: 30px;
+        }
+        #box li span{
+            width:40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #DE77D0;
+            display: block;
+            position: relative;
+            z-index: 1;
+
+        }
+        #box li p{
+            width:120px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #176fbb;
+            position: absolute;
+            left: 0;
+            top: 0;
+
+
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+    <ul id="box">
+        <li>
+            <span>反馈</span>
+            <p>我要反馈的</p>
+        </li>
+        <li>
+            <span>反馈</span>
+            <p>我要反馈的</p>
+        </li>
+        <li>
+            <span>反馈</span>
+            <p>我要反馈的</p>
+        </li>
+
+    </ul>
+
+<script>
+    var box = document.getElementById("box");
+    var oLis =  document.querySelectorAll("#box li");
+    var oPs = document.querySelectorAll("#box li p");
+    console.log(oLis.length);
+
+
+    function fn(i) {
+        var timer = null;
+        var p_left =0;
+        oLis[i].index =i;
+        oLis[i].onmouseenter = function () {
+            clearInterval(timer);
+            var _this = this;
+            timer = setInterval(function () {
+                p_left--;
+                if (p_left <=120){
+                    p_left = -120;
+                    clearInterval(timer);
+                }
+                oPs[_this.index].style.left = p_left + "px";
+            },1)
+
+        }
+        oLis[i].onmouseleave = function () {
+            clearInterval(timer);
+            var _this = this;
+            timer = setInterval(function () {
+                p_left++;
+                if (p_left >=0){
+                    p_left = 0;
+                    clearInterval(timer);
+                }
+                oPs[_this.index].style.left = p_left + "px";
+            },1)
+        }
+
+    }
+
+
+    for (var i = 0; i < oLis.length; i++) {
+        fn(i);
+    }
+
+
+
+   /*for (var i=0;i<oLis.length;i++){
+        oLis[i].index =i;
+        oLis[i].onmouseenter = function () {
+            clearInterval(timer);
+            var _this = this;
+            timer = setInterval(function () {
+                p_left--;
+                if (p_left <=120){
+                    p_left = -120;
+                    clearInterval(timer);
+                }
+                oPs[_this.index].style.left = p_left + "px";
+            },1)
+
+        };
+        oLis[i].onmouseleave = function () {
+            clearInterval(timer);
+            var _this = this;
+            timer = setInterval(function () {
+                p_left++;
+                if (p_left >=0){
+                    p_left = 0;
+                    clearInterval(timer);
+                }
+                oPs[_this.index].style.left = p_left + "px";
+            },1)
+        }
+
+    }*/
+
+</script>
+</body>
+</html>
